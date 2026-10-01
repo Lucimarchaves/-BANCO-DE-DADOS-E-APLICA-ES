@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Veículos disponíveis</title>
+</head>
+<body>
+    <h1>Veículos disponíveis para venda</h1>
+    <table border="1">
+        <tr>
+            <th>Placa</th>
+            <th>Marca</th>
+            <th>Modelo</th>
+            <th>Cor</th>
+            <th>Valor anunciado</th>
+            <th>Ações</th>
+        </tr>
+        {% for v in veiculos %}
+        <tr>
+            <td>{{ v.placa }}</td>
+            <td>{{ v.marca }}</td>
+            <td>{{ v.modelo }}</td>
+            <td>{{ v.cor }}</td>
+            <td>R$ {{ v.valor_anunciado }}</td>
+            <td>
+                <a href="{{ url_for('vender_veiculo', id_veiculo=v.id_veiculo) }}">
+                    Vender
+                </a>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+    <a href="{{ url_for('listar_vendas') }}">Ver vendas</a>
+</body>
+</html>

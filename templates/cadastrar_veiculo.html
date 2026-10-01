@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Cadastrar veículo</title>
+</head>
+<body>
+    <h1>Cadastrar veículo</h1>
+
+    <form method="post">
+        <label>Placa:</label>
+        <input type="text" name="placa" maxlength="10" required><br>
+
+        <label>Chassi:</label>
+        <input type="text" name="chassi" maxlength="50" required><br>
+
+        <label>Modelo:</label>
+        <select name="id_modelo" required>
+            {% for m in modelos %}
+            <option value="{{ m.id_modelo }}">{{ m.marca }} - {{ m.nome }}</option>
+            {% endfor %}
+        </select><br>
+
+        <label>Ano de fabricação:</label>
+        <input type="number" name="ano_fabricacao" min="1900" max="2155" required><br>
+
+        <label>Ano do modelo:</label>
+        <input type="number" name="ano_modelo" min="1900" max="2155" required><br>
+
+        <label>Cor:</label>
+        <input type="text" name="cor" maxlength="50"><br>
+
+        <label>Quilometragem:</label>
+        <input type="number" name="quilometragem" min="0" value="0"><br>
+
+        <label>Combustível:</label>
+        <select name="combustivel">
+            <option value="Flex">Flex</option>
+            <option value="Gasolina">Gasolina</option>
+            <option value="Etanol">Etanol</option>
+            <option value="Diesel">Diesel</option>
+            <option value="Elétrico">Elétrico</option>
+            <option value="Híbrido">Híbrido</option>
+        </select><br>
+
+        <label>Câmbio:</label>
+        <select name="cambio">
+            <option value="Manual">Manual</option>
+            <option value="Automático">Automático</option>
+        </select><br>
+
+        <label>Número de portas:</label>
+        <input type="number" name="numero_portas" min="1" max="6" value="4"><br>
+
+        <label>Valor de aquisição:</label>
+        <input type="number" step="0.01" name="valor_aquisicao" min="0"><br>
+
+        <label>Valor anunciado:</label>
+        <input type="number" step="0.01" name="valor_anunciado" min="0"><br>
+
+        <label>Situação:</label>
+        <select name="situacao">
+            <option value="Disponível">Disponível</option>
+            <option value="Reservado">Reservado</option>
+            <option value="Vendido">Vendido</option>
+        </select><br>
+
+        <button type="submit">Cadastrar veículo</button>
+    </form>
+
+    <a href="{{ url_for('listar_veiculos') }}">Voltar</a>
+</body>
+</html>

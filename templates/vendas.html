@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Vendas</title>
+</head>
+<body>
+    <h1>Vendas realizadas</h1>
+    <table border="1">
+        <tr>
+            <th>Data</th>
+            <th>Placa</th>
+            <th>Cliente</th>
+            <th>Vendedor</th>
+            <th>Valor</th>
+            <th>Desconto</th>
+        </tr>
+        {% for v in vendas %}
+        <tr>
+            <td>{{ v.data_venda }}</td>
+            <td>{{ v.placa }}</td>
+            <td>{{ v.cliente }}</td>
+            <td>{{ v.vendedor }}</td>
+            <td>R$ {{ v.valor_venda }}</td>
+            <td>R$ {{ v.desconto }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+
+    <a href="{{ url_for('listar_veiculos') }}">Voltar para veículos</a>
+</body>
+</html>

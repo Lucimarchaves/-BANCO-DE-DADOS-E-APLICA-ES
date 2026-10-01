@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Vendedores</title>
+</head>
+<body>
+    <h1>Vendedores cadastrados</h1>
+    <table border="1">
+        <tr>
+            <th>ID</th>
+            <th>Nome</th>
+            <th>CPF</th>
+            <th>Telefone</th>
+            <th>E-mail</th>
+            <th>Admissão</th>
+            <th>Situação</th>
+        </tr>
+        {% for v in vendedores %}
+        <tr>
+            <td>{{ v.id_vendedor }}</td>
+            <td>{{ v.nome }}</td>
+            <td>{{ v.cpf }}</td>
+            <td>{{ v.telefone or '' }}</td>
+            <td>{{ v.email or '' }}</td>
+            <td>{{ v.data_admissao.strftime('%d/%m/%Y') if v.data_admissao else '' }}</td>
+            <td>{{ v.situacao }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+
+    <a href="{{ url_for('cadastrar_vendedor') }}">Cadastrar vendedor</a> |
+    <a href="{{ url_for('index') }}">Voltar ao menu</a>
+</body>
+</html>
