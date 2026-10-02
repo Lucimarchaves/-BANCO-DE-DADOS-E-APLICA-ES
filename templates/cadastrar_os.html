@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Cadastrar Ordem de Serviço</title>
+</head>
+<body>
+    <h1>Cadastrar Ordem de Serviço</h1>
+
+    {% with mensagens = get_flashed_messages() %}
+        {% for m in mensagens %}
+            <p><strong>{{ m }}</strong></p>
+        {% endfor %}
+    {% endwith %}
+
+    <form method="post">
+        <label>Cliente:</label>
+        <select name="id_cliente" required>
+            <option value="">Selecione...</option>
+            {% for c in clientes %}
+            <option value="{{ c.id_cliente }}">{{ c.nome }}</option>
+            {% endfor %}
+        </select><br>
+
+        <label>Veículo:</label>
+        <select name="id_veiculo" required>
+            <option value="">Selecione...</option>
+            {% for v in veiculos %}
+            <option value="{{ v.id_veiculo }}">{{ v.marca }} {{ v.modelo }} - {{ v.placa }}</option>
+            {% endfor %}
+        </select><br>
+
+        <label>Mecânico responsável:</label>
+        <select name="id_mecanico" required>
+            <option value="">Selecione...</option>
+            {% for m in mecanicos %}
+            <option value="{{ m.id_mecanico }}">{{ m.nome }} ({{ m.especialidade }})</option>
+            {% endfor %}
+        </select><br>
+
+        <label>Data de abertura:</label>
+        <input type="date" name="data_abertura" value="{{ hoje }}" required><br>
+
+        <label>Observações:</label><br>
+        <textarea name="observacoes" rows="4" cols="40"></textarea><br>
+
+        <button type="submit">Salvar ordem de serviço</button>
+    </form>
+
+    <a href="{{ url_for('index') }}">Voltar ao menu</a>
+</body>
+</html>
