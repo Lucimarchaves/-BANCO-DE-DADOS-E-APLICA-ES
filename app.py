@@ -1,5 +1,6 @@
 from flask import Flask, render_template, request, redirect, url_for, flash
 from db import get_connection
+from datetime import date
 
 app = Flask(__name__)
 app.secret_key = "segredo-da-revenda"
@@ -253,6 +254,51 @@ def listar_vendedores():
     conn.close()
     return render_template("vendedores.html", vendedores=vendedores)
 
+@app.route("/cadastrar_os", methods= ["GET", "POST"])
+def cadastrar_os():
+    conn = get_connection()
+    cursor = conn.cursor(dictionary=True)
+    if request.method == "POST":
+        id_cliente = request.form.get("id_cliente")
+        id_veiculo = request.form.get("id_veiculo")
+        id_mecanico = request.form.get("id_mecanico")
+        data_abertura = request.form.get("data_abertura")
+        observacoes = request.form.get("observacoes") or None
+        cursor.execute("""
+            INSERT INTO ordem_servico (
+                data_abertura, observacoes, id_cliente, id_veiculo, id_mecanico
+            ) VALUES (%s, %s, %s, %s, %s)
+        """, (data_abertura, observacoes, id_cliente, id_veiculo, id_mecanico))
+        
+        conn.commit()
+        flash(f"Ordem de serviço nº {cursor.lastrowid} cadastrada com sucesso!", "success")
+        cursor.close()
+        conn.close()
+        return redirect(url_for("cadastrar_os"))
+    
+    cursor.execute("SELECT id_cliente, nome FROM cliente ORDER BY nome")
+    clientes = cursor.fetchall()
+        
+    cursor.execute("""
+        SELECT v.id_veiculo, v.placa, mo.nome AS modelo, ma.nome AS marca
+        FROM veiculo v
+        INNER JOIN modelo mo ON mo.id_modelo = v.id_modelo
+        INNER JOIN marca ma ON ma.id_marca = mo.id_marca
+        ORDER BY ma.nome, mo.nome
+    """)
+    veiculos = cursor.fetchall()
 
+    cursor.execute("SELECT id_mecanico, nome, especialidade FROM mecanico ORDER BY nome")
+    mecanicos = cursor.fetchall()
+
+    cursor.close()
+    conn.close()
+    return render_template("cadastrar_os.html",
+                           clientes=clientes,
+                           veiculos=veiculos,
+                           mecanicos=mecanicos,
+                           hoje=date.today().isoformat())
+    
+    
 if __name__ == "__main__":
     app.run(debug=True)
