@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Relatório Gerencial</title>
+</head>
+<body>
+    <h1>Relatório gerencial: mecânicos que mais realizaram serviços</h1>
+    <table border="1">
+        <tr>
+            <th>Mecânico</th>
+            <th>Especialidade</th>
+            <th>Total de serviços</th>
+            <th>Total de OS</th>
+            <th>Faturamento</th>
+        </tr>
+        {% for r in relatorio %}
+        <tr>
+            <td>{{ r.mecanico }}</td>
+            <td>{{ r.especialidade }}</td>
+            <td>{{ r.total_servicos }}</td>
+            <td>{{ r.total_os }}</td>
+            <td>R$ {{ r.faturamento }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+
+    <a href="{{ url_for('index') }}">Voltar ao menu</a>
+</body>
+</html>

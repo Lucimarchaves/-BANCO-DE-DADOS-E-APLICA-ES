@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Ordens de Serviço</title>
+</head>
+<body>
+    <h1>Ordens de serviço</h1>
+    <table border="1">
+        <tr>
+            <th>OS</th>
+            <th>Cliente</th>
+            <th>Veículo</th>
+            <th>Mecânico</th>
+            <th>Data</th>
+        </tr>
+        {% for o in ordens %}
+        <tr>
+            <td>{{ o.os }}</td>
+            <td>{{ o.cliente }}</td>
+            <td>{{ o.veiculo }}</td>
+            <td>{{ o.mecanico }}</td>
+            <td>{{ o.data }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+
+    <a href="{{ url_for('index') }}">Voltar ao menu</a>
+</body>
+</html>
