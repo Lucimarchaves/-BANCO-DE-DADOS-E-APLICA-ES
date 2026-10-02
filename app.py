@@ -254,6 +254,56 @@ def listar_vendedores():
     conn.close()
     return render_template("vendedores.html", vendedores=vendedores)
 
+@app.route("/ordens_servico")
+def listar_ordens_servico():
+    conn = get_connection()
+    cursor = conn.cursor(dictionary=True)
+
+    cursor.execute("""
+        SELECT
+            os.id_os                                      AS os,
+            c.nome                                        AS cliente,
+            CONCAT(ma.nome, ' ', mo.nome, ' - ', v.placa) AS veiculo,
+            me.nome                                       AS mecanico,
+            DATE_FORMAT(os.data_abertura, '%d/%m/%Y')     AS data
+        FROM ordem_servico os
+        INNER JOIN cliente  c  ON c.id_cliente   = os.id_cliente
+        INNER JOIN veiculo  v  ON v.id_veiculo   = os.id_veiculo
+        INNER JOIN modelo   mo ON mo.id_modelo   = v.id_modelo
+        INNER JOIN marca    ma ON ma.id_marca    = mo.id_marca
+        INNER JOIN mecanico me ON me.id_mecanico = os.id_mecanico
+        ORDER BY os.data_abertura DESC
+    """)
+    ordens = cursor.fetchall()
+
+    cursor.close()
+    conn.close()
+    return render_template("ordens_servico.html", ordens=ordens)
+
+@app.route("/relatorio")
+def relatorio_mecanicos():
+    conn = get_connection()
+    cursor = conn.cursor(dictionary=True)
+
+    cursor.execute("""
+        SELECT
+            me.nome                             AS mecanico,
+            me.especialidade,
+            COUNT(oss.id_servico)               AS total_servicos,
+            COUNT(DISTINCT os.id_os)            AS total_os,
+            COALESCE(SUM(oss.valor_cobrado), 0) AS faturamento
+        FROM mecanico me
+        LEFT JOIN ordem_servico os  ON os.id_mecanico = me.id_mecanico
+        LEFT JOIN os_servico    oss ON oss.id_os      = os.id_os
+        GROUP BY me.id_mecanico, me.nome, me.especialidade
+        ORDER BY total_servicos DESC, faturamento DESC
+    """)
+    relatorio = cursor.fetchall()
+
+    cursor.close()
+    conn.close()
+    return render_template("relatorio.html", relatorio=relatorio)
+
 @app.route("/cadastrar_os", methods= ["GET", "POST"])
 def cadastrar_os():
     conn = get_connection()
