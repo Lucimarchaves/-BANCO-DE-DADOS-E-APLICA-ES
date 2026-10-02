@@ -2,9 +2,12 @@
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cadastrar veículo</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
+    <div class="container">
     <h1>Cadastrar veículo</h1>
 
     <form method="post">
@@ -68,6 +71,9 @@
         <button type="submit">Cadastrar veículo</button>
     </form>
 
-    <a href="{{ url_for('listar_veiculos') }}">Voltar</a>
+    <div class="actions">
+        <a href="{{ url_for('listar_veiculos') }}">Voltar</a>
+    </div>
+    </div>
 </body>
 </html>

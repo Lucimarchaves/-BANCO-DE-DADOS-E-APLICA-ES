@@ -2,38 +2,9 @@
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Revenda de Veículos - Menu Principal</title>
-    <style>
-        body {
-            font-family: Arial;
-            background-color: #f5f5f5;
-            padding: 40px;
-        }
-        h1 {
-            text-align: center;
-        }
-        .menu {
-            width: 400px;
-            margin: auto;
-            background: white;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 0 10px #ccc;
-        }
-        .menu a {
-            display: block;
-            padding: 12px;
-            margin: 8px 0;
-            background: #007bff;
-            color: white;
-            text-decoration: none;
-            text-align: center;
-            border-radius: 6px;
-        }
-        .menu a:hover {
-            background: #0056b3;
-        }
-    </style>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
 

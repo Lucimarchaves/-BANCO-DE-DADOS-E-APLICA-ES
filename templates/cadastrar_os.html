@@ -2,9 +2,12 @@
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cadastrar Ordem de Serviço</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
+    <div class="container">
     <h1>Cadastrar Ordem de Serviço</h1>
 
     {% with mensagens = get_flashed_messages() %}
@@ -47,6 +50,9 @@
         <button type="submit">Salvar ordem de serviço</button>
     </form>
 
-    <a href="{{ url_for('index') }}">Voltar ao menu</a>
+    <div class="actions">
+        <a href="{{ url_for('index') }}">Voltar ao menu</a>
+    </div>
+    </div>
 </body>
 </html>

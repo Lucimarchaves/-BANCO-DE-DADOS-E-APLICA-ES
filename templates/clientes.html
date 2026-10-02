@@ -2,9 +2,12 @@
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Clientes</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
+    <div class="container">
     <h1>Clientes cadastrados</h1>
     <table border="1">
         <tr>
@@ -27,7 +30,10 @@
         {% endfor %}
     </table>
 
-    <a href="{{ url_for('cadastrar_cliente') }}">Cadastrar cliente</a> |
-    <a href="{{ url_for('index') }}">Voltar ao menu</a>
+    <div class="actions">
+        <a href="{{ url_for('cadastrar_cliente') }}">Cadastrar cliente</a>
+        <a href="{{ url_for('index') }}">Voltar ao menu</a>
+    </div>
+    </div>
 </body>
 </html>
