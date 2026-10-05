@@ -214,7 +214,7 @@ Isso facilita a apresentação e os testes do sistema sem necessidade de inserir
 
 ---
 
-## 📌 Observações
+##  Observações
 
 - O projeto pode ser usado como base para apresentação acadêmica ou demonstração de desenvolvimento web com Flask e banco relacional.
 - A interface foi organizada em templates separados, com CSS centralizado em `static/style.css`.
@@ -225,9 +225,3 @@ Isso facilita a apresentação e os testes do sistema sem necessidade de inserir
   - permissões do usuário `root` no ambiente local.
 
 ---
-
-## 👨‍💻 Autor
-
-Projeto desenvolvido para estudo e apresentação acadêmica em Banco de Dados e Aplicações.
-
-Se quiser, posso também preparar uma versão final do README mais visual, com badges, screenshots e instruções de apresentação para GitHub. 
